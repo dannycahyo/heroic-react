@@ -22,11 +22,31 @@ A three day workshop to learn the fundamentals of React by building a simple Her
 - Code editor (VS Code recommended)
 - Live Server extension or similar local development server
 
+## 📚 Resources
+
+Before starting, check out these helpful guides:
+
+- **[Setup Guide](./resources/setup-guide.md)** - Get your environment ready
+- **[React Cheat Sheet](./resources/react-cheatsheet.md)** - Quick reference for React concepts
+- **[Heroes Data](./resources/heroes-data.js)** - Sample data for exercises
+
+## 🗂️ Workshop Structure
+
+Each exercise folder contains:
+
+- `README.md` - Instructions and learning objectives
+- `exercise.html` - Starter code with TODOs
+- `solution.html` - Complete working solution
+
 ## Curriculum
 
 ### Day 1: From DOM to React (2 hours)
 
+**[📁 Day 1 Exercises](./day-1/)**
+
 #### 1. Basic JavaScript-rendered Hello World (30 min)
+
+**[📂 Exercise Folder](./day-1/01-dom-hello-world/)**
 
 - Understanding the DOM (Document Object Model)
 - Creating DOM elements with vanilla JavaScript
@@ -35,6 +55,8 @@ A three day workshop to learn the fundamentals of React by building a simple Her
 - **Exercise:** Build a "Hello World" page using only JavaScript
 
 #### 2. Intro to React with `React.createElement()` (30 min)
+
+**[📂 Exercise Folder](./day-1/02-react-createElement/)**
 
 - Why React? The declarative approach
 - Setting up React via CDN (keep it simple for learning)
@@ -45,6 +67,8 @@ A three day workshop to learn the fundamentals of React by building a simple Her
 
 #### 3. JSX - JavaScript XML (45 min)
 
+**[📂 Exercise Folder](./day-1/03-jsx/)**
+
 - What is JSX and why use it?
 - JSX syntax rules (className, camelCase, self-closing tags)
 - Expressions in JSX with curly braces `{}`
@@ -54,6 +78,8 @@ A three day workshop to learn the fundamentals of React by building a simple Her
 
 #### 4. Creating Custom Components (15 min)
 
+**[📂 Exercise Folder](./day-1/04-custom-components/)**
+
 - Function components
 - Component naming conventions (PascalCase)
 - Composing components
@@ -61,94 +87,92 @@ A three day workshop to learn the fundamentals of React by building a simple Her
 
 ---
 
-### Day 2: Components, Props & State (3 hours)
+### Day 2: Interactive React (3 hours)
+
+**[📁 Day 2 Exercises](./day-2/)**
 
 #### 1. Props - Passing Data to Components (45 min)
 
-- What are props?
-- Passing props to components
-- Accessing props in function components
-- Children prop
-- Props are read-only (immutability)
-- **Exercise:** Create a `HeroCard` component that accepts name, power, and image props
+**[📂 Exercise Folder](./day-2/01-props/)**
 
-#### 2. Rendering Lists (30 min)
+- Understanding props (properties)
+- Passing data from parent to child
+- Destructuring props for cleaner code
+- Default props
+- **Exercise:** Create a `HeroCard` component that displays hero information
+
+#### 2. Rendering Lists (45 min)
+
+**[📂 Exercise Folder](./day-2/02-lists/)**
 
 - Using `map()` to render arrays
-- The `key` prop and why it matters
-- Rendering dynamic lists from data
-- **Exercise:** Render a list of heroes from an array
+- The importance of `key` prop
+- Filtering and transforming data
+- Working with arrays in React
+- **Exercise:** Display a list of heroes using the `HeroCard` component
 
-#### 3. Event Handling (30 min)
+#### 3. Handling Events (45 min)
 
-- Handling events in React (onClick, onChange, onSubmit)
+**[📂 Exercise Folder](./day-2/03-events/)**
+
+- Event handling in React (onClick, onChange, etc.)
+- Synthetic events
 - Event handler functions
 - Passing arguments to event handlers
-- **Exercise:** Add a "favorite" button to hero cards
+- **Exercise:** Add click handlers to toggle hero details
 
-#### 4. State with `useState` Hook (75 min)
+#### 4. State with `useState` (45 min)
+
+**[📂 Exercise Folder](./day-2/04-state/)**
 
 - What is state?
-- Introducing hooks and the rules of hooks
-- `useState` syntax: `const [value, setValue] = useState(initialValue)`
-- Updating state and re-rendering
-- State vs props
-- Multiple state variables
-- **Exercise:**
-  - Create a counter component
-  - Add favorite functionality that toggles hero cards
-  - Build a form with controlled inputs
+- The `useState` hook
+- State vs Props
+- Updating state immutably
+- Managing multiple state variables
+- **Exercise:** Add favorite functionality - users can mark heroes as favorites
 
 ---
 
-### Day 3: Side Effects & Final Project (3 hours)
+### Day 3: Side Effects and Real-World App (3 hours)
 
-#### 1. Side Effects with `useEffect` Hook (60 min)
+**[📁 Day 3 Exercises](./day-3/)**
+
+#### 1. Side Effects with `useEffect` (1 hour)
+
+**[📂 Exercise Folder](./day-3/01-useEffect/)**
 
 - What are side effects?
-- `useEffect` syntax and the dependency array
-- Effect cleanup (return function)
-- Common use cases: data fetching, subscriptions, DOM updates
-- Dependency array: `[]`, `[dep]`, and no array
-- **Exercise:**
-  - Create a component that fetches data from DummyJSON API
-  - Display loading states
+- The `useEffect` hook
+- Dependency arrays
+- Cleanup functions
+- Common use cases (timers, subscriptions, etc.)
+- **Exercise:** Create a timer and update document title based on state
 
-#### 2. Fetching Data from APIs (30 min)
+#### 2. Data Fetching (1 hour)
 
-- Using `fetch()` with `useEffect`
-- Handling loading, success, and error states
-- Working with the DummyJSON Products API
-- Async/await in useEffect
-- **Exercise:** Build a product list component that fetches from `https://dummyjson.com/products`
+**[📂 Exercise Folder](./day-3/02-data-fetching/)**
 
-#### 3. Final Project: Product Showcase App (90 min)
+- Fetching data with `fetch()`
+- Async/await in React
+- Loading states
+- Error handling
+- **Exercise:** Fetch products from DummyJSON API
 
-Build a mini e-commerce product showcase with the following features:
+#### 3. Final Project - Product Showcase (1 hour)
 
-**Core Features:**
+**[📂 Exercise Folder](./day-3/03-final-project/)**
 
-- Display products from DummyJSON API
-- Product grid/list view
-- Product details (title, price, description, image, rating)
-- Search/filter functionality
-- Add to cart counter (using useState)
-- Responsive design with basic CSS
+Build a complete mini web app that combines everything learned:
 
-**Components to Build:**
+- Component composition (Header, ProductCard, SearchBar)
+- State management (products, cart, search, filters)
+- Event handling (add to cart, search, filter)
+- Side effects (data fetching with useEffect)
+- List rendering (products grid)
+- API integration (DummyJSON Products API)
 
-- `App` - Main application component
-- `ProductList` - Fetches and displays products
-- `ProductCard` - Individual product display
-- `SearchBar` - Filter products
-- `Cart` - Simple cart counter in header
-
-**Stretch Goals (if time permits):**
-
-- Category filtering
-- Sort by price
-- Product detail modal/page
-- Loading skeleton
+**Goal:** Students will have a functional product showcase with shopping cart, search, and filtering capabilities!
 
 ---
 

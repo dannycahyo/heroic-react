@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Exercise 2: Data Fetching</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      function ProductCard({ product }) {
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '12px',
+              padding: '20px',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <img
+              src={product.thumbnail}
+              alt={product.title}
+              style={{
+                width: '100%',
+                height: '200px',
+                objectFit: 'cover',
+                borderRadius: '8px',
+                marginBottom: '15px',
+              }}
+            />
+            <h3 style={{ color: 'white', margin: '0 0 10px 0' }}>
+              {product.title}
+            </h3>
+            <p
+              style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '14px',
+                margin: '0 0 10px 0',
+              }}
+            >
+              {product.description.substring(0, 80)}...
+            </p>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <span
+                style={{
+                  color: 'white',
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                }}
+              >
+                ${product.price}
+              </span>
+              <span style={{ color: '#ffd700', fontSize: '14px' }}>
+                ⭐ {product.rating}
+              </span>
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        // TODO: Create state for products, loading, and error
+        // const [products, setProducts] = React.useState([]);
+        // const [loading, setLoading] = React.useState(true);
+        // const [error, setError] = React.useState(null);
+
+        // TODO: Use useEffect to fetch data
+        // React.useEffect(() => {
+        //   const fetchProducts = async () => {
+        //     try {
+        //       const response = await fetch('https://dummyjson.com/products?limit=12');
+        //       const data = await response.json();
+        //       setProducts(data.products);
+        //       setLoading(false);
+        //     } catch (err) {
+        //       setError(err.message);
+        //       setLoading(false);
+        //     }
+        //   };
+        //
+        //   fetchProducts();
+        // }, []);
+
+        // TODO: Show loading state
+        // if (loading) return <div>Loading...</div>;
+
+        // TODO: Show error state
+        // if (error) return <div>Error: {error}</div>;
+
+        return (
+          <div
+            style={{
+              maxWidth: '1200px',
+              margin: '0 auto',
+              padding: '20px',
+            }}
+          >
+            <h1
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                fontSize: '48px',
+                marginBottom: '40px',
+              }}
+            >
+              Product Showcase
+            </h1>
+
+            {/* TODO: Display products in a grid */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns:
+                  'repeat(auto-fill, minmax(280px, 1fr))',
+                gap: '24px',
+              }}
+            >
+              {/* {products.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))} */}
+            </div>
+          </div>
+        );
+      }
+
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<App />);
+    </script>
+  </body>
+</html>

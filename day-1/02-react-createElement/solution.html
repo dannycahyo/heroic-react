@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Solution 2: React createElement</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Root element where React will render -->
+    <div id="root"></div>
+
+    <!-- React and ReactDOM from CDN -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <script>
+      // Get the root DOM element
+      const rootElement = document.getElementById('root');
+
+      // Create React elements
+      const heading = React.createElement(
+        'h1',
+        {
+          style: {
+            color: 'white',
+            fontSize: '48px',
+            margin: '0',
+            fontWeight: 'bold',
+          },
+        },
+        'Hello World',
+      );
+
+      const paragraph = React.createElement(
+        'p',
+        {
+          style: {
+            color: 'white',
+            fontSize: '24px',
+            margin: '10px 0',
+          },
+        },
+        'Welcome to React!',
+      );
+
+      const button = React.createElement(
+        'button',
+        {
+          onClick: () => alert('Button clicked!'),
+          style: {
+            padding: '12px 24px',
+            fontSize: '18px',
+            backgroundColor: '#fff',
+            color: '#667eea',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            marginTop: '20px',
+          },
+        },
+        'Click Me!',
+      );
+
+      // Create a container div with nested children
+      const container = React.createElement(
+        'div',
+        {
+          className: 'container',
+          style: {
+            padding: '40px',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '16px',
+            textAlign: 'center',
+            maxWidth: '600px',
+            margin: '50px auto',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+          },
+        },
+        heading,
+        paragraph,
+        button,
+      );
+
+      // Create a root and render
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(container);
+
+      // Note: Compare this to Exercise 1!
+      // This is more declarative - we describe WHAT we want,
+      // not HOW to create it step-by-step
+    </script>
+  </body>
+</html>

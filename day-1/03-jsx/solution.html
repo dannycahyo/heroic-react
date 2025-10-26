@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Solution 3: JSX</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React and ReactDOM -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <!-- Babel Standalone for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Note: type="text/babel" is required for JSX -->
+    <script type="text/babel">
+      const rootElement = document.getElementById('root');
+
+      // Variables to use in JSX
+      const userName = 'React Developer';
+      const currentTime = new Date().toLocaleTimeString();
+      const isEvening = new Date().getHours() >= 18;
+
+      // Styles as objects (can be reused)
+      const containerStyle = {
+        padding: '40px',
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderRadius: '16px',
+        textAlign: 'center',
+        maxWidth: '600px',
+        margin: '50px auto',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+        backdropFilter: 'blur(10px)',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+      };
+
+      const headingStyle = {
+        color: 'white',
+        fontSize: '48px',
+        margin: '0',
+        fontWeight: 'bold',
+      };
+
+      const paragraphStyle = {
+        color: 'white',
+        fontSize: '24px',
+        margin: '10px 0',
+      };
+
+      const buttonStyle = {
+        padding: '12px 24px',
+        fontSize: '18px',
+        backgroundColor: '#fff',
+        color: '#667eea',
+        border: 'none',
+        borderRadius: '8px',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        marginTop: '20px',
+      };
+
+      // JSX element - much cleaner than React.createElement!
+      const element = (
+        <div className="container" style={containerStyle}>
+          <h1 style={headingStyle}>Hello World</h1>
+          <p style={paragraphStyle}>Welcome to React, {userName}!</p>
+          <p style={{ ...paragraphStyle, fontSize: '18px' }}>
+            Current time: {currentTime}
+          </p>
+
+          {/* Conditional rendering */}
+          {isEvening && (
+            <p
+              style={{
+                ...paragraphStyle,
+                fontSize: '16px',
+                fontStyle: 'italic',
+              }}
+            >
+              Good evening! 🌙
+            </p>
+          )}
+
+          <button
+            style={buttonStyle}
+            onClick={() => alert('You clicked the button!')}
+          >
+            Click Me!
+          </button>
+
+          {/* Using expressions */}
+          <p
+            style={{
+              ...paragraphStyle,
+              fontSize: '16px',
+              marginTop: '20px',
+            }}
+          >
+            Random number: {Math.floor(Math.random() * 100)}
+          </p>
+        </div>
+      );
+
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(element);
+
+      // Key Takeaways:
+      // 1. JSX looks like HTML but it's JavaScript
+      // 2. Use {} for JavaScript expressions
+      // 3. className instead of class
+      // 4. style takes an object with camelCase properties
+      // 5. Much more readable than React.createElement()!
+    </script>
+  </body>
+</html>

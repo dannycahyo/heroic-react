@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Solution 4: useState Hook</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const heroesData = [
+        {
+          id: 1,
+          name: 'Iron Man',
+          power: 'Genius intellect, powered armor suit',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/346-iron-man.jpg',
+          realName: 'Tony Stark',
+          team: 'Avengers',
+        },
+        {
+          id: 2,
+          name: 'Spider-Man',
+          power: 'Wall-crawling, super strength, spider-sense',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/620-spider-man.jpg',
+          realName: 'Peter Parker',
+          team: 'Avengers',
+        },
+        {
+          id: 3,
+          name: 'Wonder Woman',
+          power: 'Super strength, speed, combat skills',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/720-wonder-woman.jpg',
+          realName: 'Diana Prince',
+          team: 'Justice League',
+        },
+        {
+          id: 4,
+          name: 'Batman',
+          power: 'Genius intellect, martial arts, detective skills',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/70-batman.jpg',
+          realName: 'Bruce Wayne',
+          team: 'Justice League',
+        },
+        {
+          id: 5,
+          name: 'Black Panther',
+          power: 'Enhanced strength, speed, vibranium suit',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/106-black-panther.jpg',
+          realName: "T'Challa",
+          team: 'Avengers',
+        },
+        {
+          id: 6,
+          name: 'Captain Marvel',
+          power: 'Flight, energy projection, super strength',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/157-captain-marvel.jpg',
+          realName: 'Carol Danvers',
+          team: 'Avengers',
+        },
+      ];
+
+      // EXERCISE 1: Simple Counter Component
+      function Counter() {
+        // State for count
+        const [count, setCount] = React.useState(0);
+
+        const buttonStyle = {
+          padding: '10px 20px',
+          margin: '0 5px',
+          fontSize: '18px',
+          backgroundColor: '#fff',
+          color: '#667eea',
+          border: 'none',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          transition: 'all 0.2s',
+        };
+
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              padding: '30px',
+              borderRadius: '12px',
+              textAlign: 'center',
+              marginBottom: '30px',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <h2
+              style={{
+                color: 'white',
+                margin: '0 0 20px 0',
+                fontSize: '24px',
+              }}
+            >
+              Counter Demo
+            </h2>
+            <p
+              style={{
+                color: 'white',
+                fontSize: '48px',
+                margin: '20px 0',
+                fontWeight: 'bold',
+              }}
+            >
+              {count}
+            </p>
+            <div>
+              <button
+                style={buttonStyle}
+                onClick={() => setCount((prevCount) => prevCount - 1)}
+                onMouseEnter={(e) =>
+                  (e.target.style.backgroundColor = '#ff6b6b')
+                }
+                onMouseLeave={(e) =>
+                  (e.target.style.backgroundColor = '#fff')
+                }
+              >
+                - Decrease
+              </button>
+              <button
+                style={buttonStyle}
+                onClick={() => setCount(0)}
+                onMouseEnter={(e) =>
+                  (e.target.style.backgroundColor = '#ffd93d')
+                }
+                onMouseLeave={(e) =>
+                  (e.target.style.backgroundColor = '#fff')
+                }
+              >
+                Reset
+              </button>
+              <button
+                style={buttonStyle}
+                onClick={() => setCount((prevCount) => prevCount + 1)}
+                onMouseEnter={(e) =>
+                  (e.target.style.backgroundColor = '#6bcf7f')
+                }
+                onMouseLeave={(e) =>
+                  (e.target.style.backgroundColor = '#fff')
+                }
+              >
+                + Increase
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      function Badge({ text, color = '#667eea' }) {
+        return (
+          <span
+            style={{
+              display: 'inline-block',
+              padding: '4px 12px',
+              backgroundColor: color,
+              color: 'white',
+              borderRadius: '12px',
+              fontSize: '12px',
+              fontWeight: 'bold',
+              marginTop: '8px',
+            }}
+          >
+            {text}
+          </span>
+        );
+      }
+
+      // HeroCard with favorite functionality
+      function HeroCard({
+        id,
+        name,
+        power,
+        image,
+        realName,
+        team,
+        isFavorite,
+        onToggleFavorite,
+      }) {
+        const cardStyle = {
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          borderRadius: '12px',
+          padding: '20px',
+          backdropFilter: 'blur(10px)',
+          border: isFavorite
+            ? '2px solid #ff6b6b'
+            : '1px solid rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+          transition: 'all 0.3s',
+          position: 'relative',
+        };
+
+        const imageStyle = {
+          width: '100%',
+          height: '200px',
+          objectFit: 'cover',
+          borderRadius: '8px',
+          marginBottom: '15px',
+        };
+
+        const buttonStyle = {
+          padding: '8px 16px',
+          margin: '5px',
+          fontSize: '14px',
+          backgroundColor: isFavorite ? '#ff6b6b' : '#fff',
+          color: isFavorite ? '#fff' : '#667eea',
+          border: 'none',
+          borderRadius: '6px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          transition: 'all 0.2s',
+          width: '100%',
+        };
+
+        return (
+          <div
+            style={cardStyle}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow =
+                '0 12px 48px rgba(0, 0, 0, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow =
+                '0 8px 32px rgba(0, 0, 0, 0.2)';
+            }}
+          >
+            {/* Favorite badge in corner */}
+            {isFavorite && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '10px',
+                  backgroundColor: '#ff6b6b',
+                  color: 'white',
+                  padding: '5px 10px',
+                  borderRadius: '20px',
+                  fontSize: '12px',
+                  fontWeight: 'bold',
+                }}
+              >
+                ⭐ Favorite
+              </div>
+            )}
+
+            <img src={image} alt={name} style={imageStyle} />
+            <h2
+              style={{
+                color: 'white',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                margin: '0 0 8px 0',
+              }}
+            >
+              {name}
+            </h2>
+            {realName && (
+              <p
+                style={{
+                  color: 'rgba(255, 255, 255, 0.6)',
+                  fontSize: '12px',
+                  fontStyle: 'italic',
+                  margin: '0 0 8px 0',
+                }}
+              >
+                aka {realName}
+              </p>
+            )}
+            <p
+              style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '14px',
+                margin: '0 0 8px 0',
+                lineHeight: '1.5',
+              }}
+            >
+              {power}
+            </p>
+            <Badge text={team} />
+
+            <div style={{ marginTop: '15px' }}>
+              <button
+                style={buttonStyle}
+                onClick={() => onToggleFavorite(id)}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'scale(1)';
+                }}
+              >
+                {isFavorite
+                  ? '❤️ Remove from Favorites'
+                  : '🤍 Add to Favorites'}
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        // EXERCISE 2: Search State
+        const [searchTerm, setSearchTerm] = React.useState('');
+
+        // EXERCISE 3: Favorites State (array of hero IDs)
+        const [favorites, setFavorites] = React.useState([]);
+
+        // BONUS: Show only favorites toggle
+        const [showOnlyFavorites, setShowOnlyFavorites] =
+          React.useState(false);
+
+        // Filter heroes based on search term
+        const filteredHeroes = heroesData.filter(
+          (hero) =>
+            hero.name
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            hero.realName
+              ?.toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            hero.team
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()),
+        );
+
+        // Further filter by favorites if toggled
+        const displayedHeroes = showOnlyFavorites
+          ? filteredHeroes.filter((hero) =>
+              favorites.includes(hero.id),
+            )
+          : filteredHeroes;
+
+        // Toggle favorite function
+        const toggleFavorite = (heroId) => {
+          if (favorites.includes(heroId)) {
+            // Remove from favorites - using functional update
+            setFavorites((prevFavorites) =>
+              prevFavorites.filter((id) => id !== heroId),
+            );
+          } else {
+            // Add to favorites - using functional update
+            setFavorites((prevFavorites) => [
+              ...prevFavorites,
+              heroId,
+            ]);
+          }
+        };
+
+        // Clear all favorites
+        const clearFavorites = () => {
+          setFavorites([]);
+        };
+
+        const inputStyle = {
+          width: '100%',
+          maxWidth: '400px',
+          padding: '12px 20px',
+          fontSize: '16px',
+          borderRadius: '8px',
+          border: '2px solid rgba(255, 255, 255, 0.2)',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          color: 'white',
+          backdropFilter: 'blur(10px)',
+          margin: '0 auto 20px auto',
+          display: 'block',
+        };
+
+        const buttonStyle = {
+          padding: '10px 20px',
+          margin: '5px',
+          fontSize: '14px',
+          backgroundColor: '#fff',
+          color: '#667eea',
+          border: 'none',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          transition: 'all 0.2s',
+        };
+
+        return (
+          <div
+            style={{
+              maxWidth: '1200px',
+              margin: '0 auto',
+              padding: '20px',
+            }}
+          >
+            <h1
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                fontSize: '48px',
+                marginBottom: '10px',
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              Heroic Gallery 🦸
+            </h1>
+
+            <p
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                fontSize: '18px',
+                marginBottom: '20px',
+                opacity: 0.9,
+              }}
+            >
+              ❤️ Favorites: {favorites.length} | 📊 Total Heroes:{' '}
+              {heroesData.length} | 🔍 Showing:{' '}
+              {displayedHeroes.length}
+            </p>
+
+            {/* Counter Demo */}
+            <Counter />
+
+            {/* Search Input - Controlled Component */}
+            <input
+              type="text"
+              placeholder="🔍 Search heroes by name, real name, or team..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={(e) =>
+                (e.target.style.borderColor = '#667eea')
+              }
+              onBlur={(e) =>
+                (e.target.style.borderColor =
+                  'rgba(255, 255, 255, 0.2)')
+              }
+              style={inputStyle}
+            />
+
+            {/* Control buttons */}
+            <div
+              style={{ textAlign: 'center', marginBottom: '30px' }}
+            >
+              <button
+                style={{
+                  ...buttonStyle,
+                  backgroundColor: showOnlyFavorites
+                    ? '#667eea'
+                    : '#fff',
+                  color: showOnlyFavorites ? '#fff' : '#667eea',
+                }}
+                onClick={() => setShowOnlyFavorites((prev) => !prev)}
+              >
+                {showOnlyFavorites
+                  ? '📋 Show All'
+                  : '⭐ Show Only Favorites'}
+              </button>
+
+              {favorites.length > 0 && (
+                <button
+                  style={{
+                    ...buttonStyle,
+                    backgroundColor: '#ff6b6b',
+                    color: '#fff',
+                  }}
+                  onClick={clearFavorites}
+                >
+                  🗑️ Clear All Favorites
+                </button>
+              )}
+            </div>
+
+            {/* Hero Grid */}
+            {displayedHeroes.length > 0 ? (
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns:
+                    'repeat(auto-fill, minmax(280px, 1fr))',
+                  gap: '24px',
+                }}
+              >
+                {displayedHeroes.map((hero) => (
+                  <HeroCard
+                    key={hero.id}
+                    {...hero}
+                    isFavorite={favorites.includes(hero.id)}
+                    onToggleFavorite={toggleFavorite}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div
+                style={{
+                  textAlign: 'center',
+                  padding: '60px 20px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  borderRadius: '12px',
+                  backdropFilter: 'blur(10px)',
+                }}
+              >
+                <p
+                  style={{
+                    color: 'white',
+                    fontSize: '24px',
+                    margin: '0',
+                  }}
+                >
+                  😢 No heroes found
+                </p>
+                <p
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    fontSize: '16px',
+                    margin: '10px 0 0 0',
+                  }}
+                >
+                  Try adjusting your search or filters
+                </p>
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<App />);
+
+      // Key Takeaways:
+      // 1. useState returns [value, setValue] - use array destructuring
+      // 2. State updates trigger re-renders
+      // 3. Use functional updates when new state depends on old state
+      // 4. You can have multiple useState calls in one component
+      // 5. State is local to the component
+      // 6. Never mutate state directly - always use setter function
+      // 7. Controlled components: input value comes from state
+      // 8. Array state: use spread operator or filter to update
+    </script>
+  </body>
+</html>

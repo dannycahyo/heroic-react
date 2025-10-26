@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Solution 4: Custom Components</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      // Greeting component with props
+      function Greeting({ name }) {
+        return (
+          <h1
+            style={{
+              color: 'white',
+              fontSize: '42px',
+              margin: '0 0 10px 0',
+              fontWeight: 'bold',
+            }}
+          >
+            Hello, {name}! 👋
+          </h1>
+        );
+      }
+
+      // Card component that wraps children
+      function Card({ children }) {
+        const cardStyle = {
+          padding: '40px',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          borderRadius: '16px',
+          textAlign: 'center',
+          maxWidth: '600px',
+          margin: '20px auto',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+        };
+
+        return <div style={cardStyle}>{children}</div>;
+      }
+
+      // Button component with props
+      function Button({ text, onClick }) {
+        const buttonStyle = {
+          padding: '12px 24px',
+          fontSize: '18px',
+          backgroundColor: '#fff',
+          color: '#667eea',
+          border: 'none',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          marginTop: '20px',
+          transition: 'transform 0.2s',
+        };
+
+        return (
+          <button
+            style={buttonStyle}
+            onClick={onClick}
+            onMouseEnter={(e) =>
+              (e.target.style.transform = 'scale(1.05)')
+            }
+            onMouseLeave={(e) =>
+              (e.target.style.transform = 'scale(1)')
+            }
+          >
+            {text}
+          </button>
+        );
+      }
+
+      // Message component
+      function Message({ text }) {
+        return (
+          <p
+            style={{
+              color: 'white',
+              fontSize: '20px',
+              margin: '15px 0',
+            }}
+          >
+            {text}
+          </p>
+        );
+      }
+
+      // Hero component (bonus)
+      function Hero({ name, power }) {
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              padding: '20px',
+              borderRadius: '8px',
+              margin: '10px 0',
+            }}
+          >
+            <h3 style={{ color: 'white', margin: '0 0 10px 0' }}>
+              {name}
+            </h3>
+            <p
+              style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                margin: '0',
+                fontSize: '14px',
+              }}
+            >
+              {power}
+            </p>
+          </div>
+        );
+      }
+
+      // Main App component - composes everything together
+      function App() {
+        return (
+          <div>
+            {/* First Card */}
+            <Card>
+              <Greeting name="React Developer" />
+              <Message text="Welcome to the world of components! 🚀" />
+              <Button
+                text="Click Me!"
+                onClick={() => alert('Hello from the component!')}
+              />
+            </Card>
+
+            {/* Second Card with Heroes */}
+            <Card>
+              <h2 style={{ color: 'white', marginTop: '0' }}>
+                Your Favorite Heroes
+              </h2>
+              <Hero
+                name="Iron Man"
+                power="Genius intellect, powered armor"
+              />
+              <Hero
+                name="Spider-Man"
+                power="Wall-crawling, super strength"
+              />
+              <Hero
+                name="Wonder Woman"
+                power="Super strength, combat skills"
+              />
+              <Button
+                text="Add More Heroes"
+                onClick={() => alert('More heroes coming soon!')}
+              />
+            </Card>
+          </div>
+        );
+      }
+
+      // Render the App
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<App />);
+
+      // Key Takeaways:
+      // 1. Components are reusable functions that return JSX
+      // 2. Component names must start with capital letter
+      // 3. Props let you pass data to components
+      // 4. Children prop lets you wrap content
+      // 5. Components can be composed together!
+    </script>
+  </body>
+</html>

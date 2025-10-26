@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Solution 3: Event Handling</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const heroes = [
+        {
+          id: 1,
+          name: 'Iron Man',
+          power: 'Genius intellect, powered armor suit',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/346-iron-man.jpg',
+          realName: 'Tony Stark',
+          team: 'Avengers',
+        },
+        {
+          id: 2,
+          name: 'Spider-Man',
+          power: 'Wall-crawling, super strength, spider-sense',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/620-spider-man.jpg',
+          realName: 'Peter Parker',
+          team: 'Avengers',
+        },
+        {
+          id: 3,
+          name: 'Wonder Woman',
+          power: 'Super strength, speed, combat skills',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/720-wonder-woman.jpg',
+          realName: 'Diana Prince',
+          team: 'Justice League',
+        },
+        {
+          id: 4,
+          name: 'Batman',
+          power: 'Genius intellect, martial arts, detective skills',
+          image:
+            'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/70-batman.jpg',
+          realName: 'Bruce Wayne',
+          team: 'Justice League',
+        },
+      ];
+
+      function Badge({ text, color = '#667eea' }) {
+        return (
+          <span
+            style={{
+              display: 'inline-block',
+              padding: '4px 12px',
+              backgroundColor: color,
+              color: 'white',
+              borderRadius: '12px',
+              fontSize: '12px',
+              fontWeight: 'bold',
+              marginTop: '8px',
+            }}
+          >
+            {text}
+          </span>
+        );
+      }
+
+      function HeroCard({
+        name,
+        power,
+        image,
+        realName,
+        team = 'Independent',
+      }) {
+        // Event handler for favorite button
+        const handleFavorite = () => {
+          alert(`❤️ ${name} added to favorites!`);
+        };
+
+        // Event handler for view details
+        const handleViewDetails = () => {
+          const details = `
+Hero: ${name}
+Real Name: ${realName || 'Unknown'}
+Power: ${power}
+Team: ${team}
+        `;
+          alert(details);
+        };
+
+        // Event handler for share (with event object)
+        const handleShare = (event) => {
+          event.stopPropagation(); // Prevent event bubbling
+          alert(`Share ${name} on social media!`);
+        };
+
+        const cardStyle = {
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          borderRadius: '12px',
+          padding: '20px',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+          transition: 'transform 0.3s, box-shadow 0.3s',
+        };
+
+        const imageStyle = {
+          width: '100%',
+          height: '200px',
+          objectFit: 'cover',
+          borderRadius: '8px',
+          marginBottom: '15px',
+        };
+
+        const buttonStyle = {
+          padding: '8px 16px',
+          margin: '5px',
+          fontSize: '14px',
+          backgroundColor: '#fff',
+          color: '#667eea',
+          border: 'none',
+          borderRadius: '6px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          transition: 'all 0.2s',
+        };
+
+        return (
+          <div
+            style={cardStyle}
+            // Mouse events for hover effects
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow =
+                '0 12px 48px rgba(0, 0, 0, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow =
+                '0 8px 32px rgba(0, 0, 0, 0.2)';
+            }}
+          >
+            <img src={image} alt={name} style={imageStyle} />
+            <h2
+              style={{
+                color: 'white',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                margin: '0 0 8px 0',
+              }}
+            >
+              {name}
+            </h2>
+            {realName && (
+              <p
+                style={{
+                  color: 'rgba(255, 255, 255, 0.6)',
+                  fontSize: '12px',
+                  fontStyle: 'italic',
+                  margin: '0 0 8px 0',
+                }}
+              >
+                aka {realName}
+              </p>
+            )}
+            <p
+              style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '14px',
+                margin: '0 0 8px 0',
+                lineHeight: '1.5',
+              }}
+            >
+              {power}
+            </p>
+            <Badge text={team} />
+
+            <div style={{ marginTop: '15px' }}>
+              {/* Button with onClick handler */}
+              <button
+                style={buttonStyle}
+                onClick={handleFavorite}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#667eea';
+                  e.target.style.color = '#fff';
+                  e.target.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = '#fff';
+                  e.target.style.color = '#667eea';
+                  e.target.style.transform = 'scale(1)';
+                }}
+              >
+                ❤️ Favorite
+              </button>
+
+              <button
+                style={buttonStyle}
+                onClick={handleViewDetails}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#667eea';
+                  e.target.style.color = '#fff';
+                  e.target.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = '#fff';
+                  e.target.style.color = '#667eea';
+                  e.target.style.transform = 'scale(1)';
+                }}
+              >
+                ℹ️ Details
+              </button>
+
+              <button
+                style={buttonStyle}
+                onClick={handleShare}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#667eea';
+                  e.target.style.color = '#fff';
+                  e.target.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = '#fff';
+                  e.target.style.color = '#667eea';
+                  e.target.style.transform = 'scale(1)';
+                }}
+              >
+                🔗 Share
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        // Event handler for search input
+        const handleSearch = (event) => {
+          const searchTerm = event.target.value;
+          console.log('Searching for:', searchTerm);
+          // In next exercise, we'll use state to actually filter!
+        };
+
+        // Event handler for form submit
+        const handleSubmit = (event) => {
+          event.preventDefault(); // Prevent page refresh
+          alert("Form submitted! (Next exercise: we'll use state)");
+        };
+
+        // Keyboard event handler
+        const handleKeyDown = (event) => {
+          if (event.key === 'Enter') {
+            console.log('Enter key pressed!');
+          }
+        };
+
+        const inputStyle = {
+          width: '100%',
+          maxWidth: '400px',
+          padding: '12px 20px',
+          fontSize: '16px',
+          borderRadius: '8px',
+          border: '2px solid rgba(255, 255, 255, 0.2)',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          color: 'white',
+          backdropFilter: 'blur(10px)',
+          margin: '0 auto',
+          display: 'block',
+        };
+
+        return (
+          <div
+            style={{
+              maxWidth: '1200px',
+              margin: '0 auto',
+              padding: '20px',
+            }}
+          >
+            <h1
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                fontSize: '48px',
+                marginBottom: '20px',
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              Heroic Gallery 🦸
+            </h1>
+
+            {/* Form with event handlers */}
+            <form
+              onSubmit={handleSubmit}
+              style={{ marginBottom: '30px' }}
+            >
+              <input
+                type="text"
+                placeholder="Search heroes... (type and check console)"
+                onChange={handleSearch}
+                onKeyDown={handleKeyDown}
+                onFocus={(e) =>
+                  (e.target.style.borderColor = '#667eea')
+                }
+                onBlur={(e) =>
+                  (e.target.style.borderColor =
+                    'rgba(255, 255, 255, 0.2)')
+                }
+                style={inputStyle}
+              />
+            </form>
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns:
+                  'repeat(auto-fill, minmax(280px, 1fr))',
+                gap: '24px',
+              }}
+            >
+              {heroes.map((hero) => (
+                <HeroCard key={hero.id} {...hero} />
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<App />);
+
+      // Key Takeaways:
+      // 1. Use camelCase for event names (onClick, onChange, etc.)
+      // 2. Pass function references, not function calls
+      // 3. Use arrow functions to pass parameters
+      // 4. Event object is automatically passed to handlers
+      // 5. Use preventDefault() to prevent default behavior
+      // 6. Events in React are more performant than vanilla JS
+    </script>
+  </body>
+</html>

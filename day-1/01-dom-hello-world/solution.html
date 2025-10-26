@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Solution 1: DOM Hello World</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // Create a div element
+      const element = document.createElement('div');
+
+      // Set the text content to "Hello World"
+      element.textContent = 'Hello World';
+
+      // Add a className
+      element.className = 'container';
+
+      // Style the element using JavaScript
+      element.style.color = 'white';
+      element.style.fontSize = '48px';
+      element.style.padding = '30px 60px';
+      element.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+      element.style.borderRadius = '16px';
+      element.style.textAlign = 'center';
+      element.style.fontWeight = 'bold';
+      element.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
+      element.style.backdropFilter = 'blur(10px)';
+      element.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+
+      // Append to the document body
+      document.body.appendChild(element);
+
+      // BONUS: Create another element with your name
+      const nameElement = document.createElement('div');
+      nameElement.textContent = 'Welcome to React Workshop';
+      nameElement.style.color = 'white';
+      nameElement.style.fontSize = '24px';
+      nameElement.style.padding = '15px 30px';
+      nameElement.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+      nameElement.style.borderRadius = '8px';
+      nameElement.style.backdropFilter = 'blur(10px)';
+      document.body.appendChild(nameElement);
+
+      // BONUS: Create a button that changes the text
+      const button = document.createElement('button');
+      button.textContent = 'Click Me!';
+      button.style.padding = '12px 24px';
+      button.style.fontSize = '18px';
+      button.style.backgroundColor = '#fff';
+      button.style.color = '#667eea';
+      button.style.border = 'none';
+      button.style.borderRadius = '8px';
+      button.style.cursor = 'pointer';
+      button.style.fontWeight = 'bold';
+      button.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
+      button.style.transition = 'transform 0.2s';
+
+      button.addEventListener('mouseenter', () => {
+        button.style.transform = 'scale(1.05)';
+      });
+
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'scale(1)';
+      });
+
+      button.addEventListener('click', () => {
+        element.textContent = 'You clicked the button!';
+        button.textContent = 'Click Again!';
+      });
+
+      document.body.appendChild(button);
+    </script>
+  </body>
+</html>

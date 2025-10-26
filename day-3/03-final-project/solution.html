@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Final Project Solution: Product Showcase App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      // ==================== COMPONENTS ====================
+
+      // Header Component
+      function Header({ cartCount }) {
+        return (
+          <header
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              padding: '20px 0',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+              position: 'sticky',
+              top: 0,
+              zIndex: 100,
+            }}
+          >
+            <div
+              style={{
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '0 20px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <h1 style={{ color: 'white', fontSize: '32px' }}>
+                🛍️ ShopHub
+              </h1>
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                  padding: '10px 20px',
+                  borderRadius: '25px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                }}
+              >
+                <span style={{ color: 'white', fontSize: '24px' }}>
+                  🛒
+                </span>
+                <span
+                  style={{
+                    color: 'white',
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {cartCount}
+                </span>
+              </div>
+            </div>
+          </header>
+        );
+      }
+
+      // SearchBar Component
+      function SearchBar({ searchTerm, onSearchChange }) {
+        return (
+          <input
+            type="text"
+            placeholder="🔍 Search products..."
+            value={searchTerm}
+            onChange={(e) => onSearchChange(e.target.value)}
+            style={{
+              width: '100%',
+              maxWidth: '500px',
+              padding: '15px 25px',
+              fontSize: '16px',
+              borderRadius: '50px',
+              border: '2px solid rgba(255, 255, 255, 0.3)',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              color: 'white',
+              backdropFilter: 'blur(10px)',
+              outline: 'none',
+              transition: 'all 0.3s',
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = 'rgba(255, 255, 255, 0.6)';
+              e.target.style.backgroundColor =
+                'rgba(255, 255, 255, 0.15)';
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+              e.target.style.backgroundColor =
+                'rgba(255, 255, 255, 0.1)';
+            }}
+          />
+        );
+      }
+
+      // ProductCard Component
+      function ProductCard({ product, isInCart, onToggleCart }) {
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '16px',
+              padding: '20px',
+              backdropFilter: 'blur(10px)',
+              border: isInCart
+                ? '2px solid #6bcf7f'
+                : '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+              transition: 'all 0.3s',
+              cursor: 'pointer',
+              position: 'relative',
+              animation: 'slideIn 0.5s ease-out',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow =
+                '0 12px 48px rgba(0, 0, 0, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow =
+                '0 8px 32px rgba(0, 0, 0, 0.2)';
+            }}
+          >
+            {/* In Cart Badge */}
+            {isInCart && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '10px',
+                  backgroundColor: '#6bcf7f',
+                  color: 'white',
+                  padding: '6px 12px',
+                  borderRadius: '20px',
+                  fontSize: '12px',
+                  fontWeight: 'bold',
+                  zIndex: 2,
+                }}
+              >
+                ✓ In Cart
+              </div>
+            )}
+
+            {/* Product Image */}
+            <div
+              style={{
+                width: '100%',
+                height: '220px',
+                overflow: 'hidden',
+                borderRadius: '12px',
+                marginBottom: '15px',
+              }}
+            >
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  transition: 'transform 0.3s',
+                }}
+                onMouseEnter={(e) =>
+                  (e.target.style.transform = 'scale(1.1)')
+                }
+                onMouseLeave={(e) =>
+                  (e.target.style.transform = 'scale(1)')
+                }
+              />
+            </div>
+
+            {/* Category Badge */}
+            <span
+              style={{
+                display: 'inline-block',
+                padding: '4px 10px',
+                backgroundColor: '#667eea',
+                color: 'white',
+                borderRadius: '6px',
+                fontSize: '11px',
+                fontWeight: 'bold',
+                marginBottom: '10px',
+                alignSelf: 'flex-start',
+                textTransform: 'uppercase',
+              }}
+            >
+              {product.category}
+            </span>
+
+            {/* Product Title */}
+            <h3
+              style={{
+                color: 'white',
+                margin: '0 0 10px 0',
+                fontSize: '18px',
+                fontWeight: '600',
+                lineHeight: '1.4',
+              }}
+            >
+              {product.title}
+            </h3>
+
+            {/* Product Description */}
+            <p
+              style={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                fontSize: '13px',
+                margin: '0 0 15px 0',
+                lineHeight: '1.6',
+                flex: 1,
+              }}
+            >
+              {product.description.length > 90
+                ? product.description.substring(0, 90) + '...'
+                : product.description}
+            </p>
+
+            {/* Price and Rating */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '15px',
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    color: 'white',
+                    fontSize: '28px',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  ${product.price}
+                </div>
+                {product.discountPercentage > 0 && (
+                  <div
+                    style={{
+                      color: '#ff6b6b',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {product.discountPercentage.toFixed(0)}% OFF
+                  </div>
+                )}
+              </div>
+              <div
+                style={{
+                  color: '#ffd700',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                }}
+              >
+                ⭐ {product.rating.toFixed(1)}
+              </div>
+            </div>
+
+            {/* Stock Warning */}
+            {product.stock < 20 && (
+              <p
+                style={{
+                  color: '#ff6b6b',
+                  fontSize: '12px',
+                  margin: '0 0 10px 0',
+                  fontWeight: 'bold',
+                }}
+              >
+                ⚠️ Only {product.stock} left in stock!
+              </p>
+            )}
+
+            {/* Add to Cart Button */}
+            <button
+              onClick={() => onToggleCart(product.id)}
+              style={{
+                width: '100%',
+                padding: '12px',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                backgroundColor: isInCart ? '#ff6b6b' : '#6bcf7f',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'scale(1.05)';
+                e.target.style.opacity = '0.9';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'scale(1)';
+                e.target.style.opacity = '1';
+              }}
+            >
+              {isInCart ? '🗑️ Remove from Cart' : '🛒 Add to Cart'}
+            </button>
+          </div>
+        );
+      }
+
+      // Loading Component
+      function Loading() {
+        return (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: '60vh',
+              color: 'white',
+            }}
+          >
+            <div
+              style={{
+                border: '5px solid rgba(255, 255, 255, 0.2)',
+                borderTop: '5px solid white',
+                borderRadius: '50%',
+                width: '70px',
+                height: '70px',
+                animation: 'spin 1s linear infinite',
+                marginBottom: '25px',
+              }}
+            ></div>
+            <p style={{ fontSize: '22px', fontWeight: '500' }}>
+              Loading amazing products...
+            </p>
+          </div>
+        );
+      }
+
+      // Error Component
+      function ErrorDisplay({ error, onRetry }) {
+        return (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: '60vh',
+              color: 'white',
+              textAlign: 'center',
+              padding: '20px',
+            }}
+          >
+            <div style={{ fontSize: '80px', marginBottom: '20px' }}>
+              😢
+            </div>
+            <h2 style={{ fontSize: '36px', marginBottom: '15px' }}>
+              Oops! Something went wrong
+            </h2>
+            <p
+              style={{
+                fontSize: '18px',
+                opacity: 0.8,
+                marginBottom: '30px',
+              }}
+            >
+              Error: {error}
+            </p>
+            <button
+              onClick={onRetry}
+              style={{
+                padding: '15px 30px',
+                fontSize: '16px',
+                backgroundColor: '#fff',
+                color: '#667eea',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                transition: 'all 0.2s',
+              }}
+              onMouseEnter={(e) =>
+                (e.target.style.transform = 'scale(1.05)')
+              }
+              onMouseLeave={(e) =>
+                (e.target.style.transform = 'scale(1)')
+              }
+            >
+              🔄 Try Again
+            </button>
+          </div>
+        );
+      }
+
+      // Main App Component
+      function App() {
+        // State management
+        const [products, setProducts] = React.useState([]);
+        const [loading, setLoading] = React.useState(true);
+        const [error, setError] = React.useState(null);
+        const [searchTerm, setSearchTerm] = React.useState('');
+        const [cart, setCart] = React.useState([]);
+        const [selectedCategory, setSelectedCategory] =
+          React.useState('all');
+        const [sortBy, setSortBy] = React.useState('default');
+
+        // Fetch products
+        const fetchProducts = React.useCallback(async () => {
+          setLoading(true);
+          setError(null);
+
+          try {
+            const response = await fetch(
+              'https://dummyjson.com/products?limit=30',
+            );
+
+            if (!response.ok) {
+              throw new Error('Failed to fetch products');
+            }
+
+            const data = await response.json();
+            setProducts(data.products);
+          } catch (err) {
+            setError(err.message);
+          } finally {
+            setLoading(false);
+          }
+        }, []);
+
+        // Fetch on mount
+        React.useEffect(() => {
+          fetchProducts();
+        }, [fetchProducts]);
+
+        // Get unique categories
+        const categories = React.useMemo(() => {
+          const cats = [...new Set(products.map((p) => p.category))];
+          return ['all', ...cats];
+        }, [products]);
+
+        // Filter and sort products
+        const displayedProducts = React.useMemo(() => {
+          let filtered = products;
+
+          // Filter by search
+          if (searchTerm) {
+            filtered = filtered.filter(
+              (product) =>
+                product.title
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()) ||
+                product.description
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()) ||
+                product.category
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()),
+            );
+          }
+
+          // Filter by category
+          if (selectedCategory !== 'all') {
+            filtered = filtered.filter(
+              (p) => p.category === selectedCategory,
+            );
+          }
+
+          // Sort
+          if (sortBy === 'price-low') {
+            filtered = [...filtered].sort(
+              (a, b) => a.price - b.price,
+            );
+          } else if (sortBy === 'price-high') {
+            filtered = [...filtered].sort(
+              (a, b) => b.price - a.price,
+            );
+          } else if (sortBy === 'rating') {
+            filtered = [...filtered].sort(
+              (a, b) => b.rating - a.rating,
+            );
+          }
+
+          return filtered;
+        }, [products, searchTerm, selectedCategory, sortBy]);
+
+        // Toggle cart
+        const toggleCart = (productId) => {
+          setCart((prev) => {
+            if (prev.includes(productId)) {
+              return prev.filter((id) => id !== productId);
+            } else {
+              return [...prev, productId];
+            }
+          });
+        };
+
+        // Clear cart
+        const clearCart = () => {
+          setCart([]);
+        };
+
+        if (loading) return <Loading />;
+        if (error)
+          return (
+            <ErrorDisplay error={error} onRetry={fetchProducts} />
+          );
+
+        return (
+          <div style={{ minHeight: '100vh' }}>
+            <Header cartCount={cart.length} />
+
+            {/* Main Content */}
+            <main
+              style={{
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '40px 20px',
+              }}
+            >
+              {/* Search and Filters */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '20px',
+                  marginBottom: '40px',
+                }}
+              >
+                <SearchBar
+                  searchTerm={searchTerm}
+                  onSearchChange={setSearchTerm}
+                />
+
+                {/* Filters Row */}
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '15px',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  {/* Category Filter */}
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) =>
+                      setSelectedCategory(e.target.value)
+                    }
+                    style={{
+                      padding: '10px 20px',
+                      fontSize: '14px',
+                      borderRadius: '8px',
+                      border: '2px solid rgba(255, 255, 255, 0.3)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      color: 'white',
+                      backdropFilter: 'blur(10px)',
+                      cursor: 'pointer',
+                      outline: 'none',
+                    }}
+                  >
+                    {categories.map((cat) => (
+                      <option
+                        key={cat}
+                        value={cat}
+                        style={{ color: 'black' }}
+                      >
+                        {cat === 'all'
+                          ? '📁 All Categories'
+                          : `📦 ${cat}`}
+                      </option>
+                    ))}
+                  </select>
+
+                  {/* Sort Filter */}
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    style={{
+                      padding: '10px 20px',
+                      fontSize: '14px',
+                      borderRadius: '8px',
+                      border: '2px solid rgba(255, 255, 255, 0.3)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      color: 'white',
+                      backdropFilter: 'blur(10px)',
+                      cursor: 'pointer',
+                      outline: 'none',
+                    }}
+                  >
+                    <option
+                      value="default"
+                      style={{ color: 'black' }}
+                    >
+                      🔀 Default
+                    </option>
+                    <option
+                      value="price-low"
+                      style={{ color: 'black' }}
+                    >
+                      💰 Price: Low to High
+                    </option>
+                    <option
+                      value="price-high"
+                      style={{ color: 'black' }}
+                    >
+                      💎 Price: High to Low
+                    </option>
+                    <option value="rating" style={{ color: 'black' }}>
+                      ⭐ Highest Rated
+                    </option>
+                  </select>
+
+                  {/* Clear Cart Button */}
+                  {cart.length > 0 && (
+                    <button
+                      onClick={clearCart}
+                      style={{
+                        padding: '10px 20px',
+                        fontSize: '14px',
+                        borderRadius: '8px',
+                        border: 'none',
+                        backgroundColor: '#ff6b6b',
+                        color: 'white',
+                        cursor: 'pointer',
+                        fontWeight: 'bold',
+                        transition: 'all 0.2s',
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.target.style.opacity = '0.8')
+                      }
+                      onMouseLeave={(e) =>
+                        (e.target.style.opacity = '1')
+                      }
+                    >
+                      🗑️ Clear Cart
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Stats */}
+              <p
+                style={{
+                  color: 'white',
+                  textAlign: 'center',
+                  fontSize: '18px',
+                  marginBottom: '30px',
+                  opacity: 0.9,
+                }}
+              >
+                Showing <strong>{displayedProducts.length}</strong> of{' '}
+                <strong>{products.length}</strong> products
+                {cart.length > 0 &&
+                  ` | 🛒 ${cart.length} items in cart`}
+              </p>
+
+              {/* Products Grid */}
+              {displayedProducts.length > 0 ? (
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns:
+                      'repeat(auto-fill, minmax(300px, 1fr))',
+                    gap: '30px',
+                  }}
+                >
+                  {displayedProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      isInCart={cart.includes(product.id)}
+                      onToggleCart={toggleCart}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div
+                  style={{
+                    textAlign: 'center',
+                    padding: '80px 20px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    borderRadius: '16px',
+                    backdropFilter: 'blur(10px)',
+                  }}
+                >
+                  <div
+                    style={{ fontSize: '80px', marginBottom: '20px' }}
+                  >
+                    🔍
+                  </div>
+                  <p
+                    style={{
+                      color: 'white',
+                      fontSize: '28px',
+                      marginBottom: '10px',
+                    }}
+                  >
+                    No products found
+                  </p>
+                  <p
+                    style={{
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      fontSize: '16px',
+                    }}
+                  >
+                    Try adjusting your search or filters
+                  </p>
+                </div>
+              )}
+            </main>
+
+            {/* Footer */}
+            <footer
+              style={{
+                backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                color: 'white',
+                textAlign: 'center',
+                padding: '30px 20px',
+                marginTop: '60px',
+              }}
+            >
+              <p style={{ fontSize: '16px', opacity: 0.8 }}>
+                🎉 Congratulations! You've completed the React
+                Workshop!
+              </p>
+              <p
+                style={{
+                  fontSize: '14px',
+                  opacity: 0.6,
+                  marginTop: '10px',
+                }}
+              >
+                Built with React • Powered by DummyJSON API
+              </p>
+            </footer>
+          </div>
+        );
+      }
+
+      // Render App
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<App />);
+
+      // ==================== KEY TAKEAWAYS ====================
+      // 1. Component composition - breaking UI into reusable pieces
+      // 2. State management - handling multiple state variables
+      // 3. useEffect for data fetching
+      // 4. Derived state with useMemo
+      // 5. Event handling and user interactions
+      // 6. Conditional rendering (loading, error, empty states)
+      // 7. Lists and keys
+      // 8. Props passing
+      // 9. Controlled components (inputs, selects)
+      // 10. Real-world React patterns and best practices
+    </script>
+  </body>
+</html>

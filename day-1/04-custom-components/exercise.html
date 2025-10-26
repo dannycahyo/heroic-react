@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Exercise 4: Custom Components</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      // TODO: Create a Greeting component that accepts a 'name' prop
+      // function Greeting(props) {
+      //   return <h1>Hello, {props.name}!</h1>;
+      // }
+
+      // TODO: Create a Card component that wraps children with styling
+      // function Card(props) {
+      //   return (
+      //     <div style={{ ...card styles... }}>
+      //       {props.children}
+      //     </div>
+      //   );
+      // }
+
+      // TODO: Create a Button component
+      // function Button(props) {
+      //   return <button onClick={props.onClick}>{props.text}</button>;
+      // }
+
+      // TODO: Create a main App component that uses your components
+      // function App() {
+      //   return (
+      //     <div>
+      //       <Card>
+      //         <Greeting name="Your Name" />
+      //         <Button text="Click Me" onClick={() => alert('Clicked!')} />
+      //       </Card>
+      //     </div>
+      //   );
+      // }
+
+      // TODO: Render the App component
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      // root.render(<App />);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Exercise 1: useEffect Hook</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      // Mock data for simulation
+      const mockHeroes = [
+        { id: 1, name: 'Iron Man', team: 'Avengers' },
+        { id: 2, name: 'Spider-Man', team: 'Avengers' },
+        { id: 3, name: 'Wonder Woman', team: 'Justice League' },
+      ];
+
+      // TODO: EXERCISE 1 - Document Title Update
+      function TitleUpdater() {
+        const [count, setCount] = React.useState(0);
+
+        // TODO: Use useEffect to update document title
+        // React.useEffect(() => {
+        //   document.title = `Count: ${count}`;
+        // }, [count]);
+
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              padding: '20px',
+              borderRadius: '12px',
+              marginBottom: '20px',
+            }}
+          >
+            <h2 style={{ color: 'white' }}>Title Updater</h2>
+            <p style={{ color: 'white' }}>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>
+              Increment
+            </button>
+          </div>
+        );
+      }
+
+      // TODO: EXERCISE 2 - Timer
+      function Timer() {
+        const [seconds, setSeconds] = React.useState(0);
+
+        // TODO: Use useEffect to create a timer
+        // React.useEffect(() => {
+        //   const intervalId = setInterval(() => {
+        //     setSeconds(prev => prev + 1);
+        //   }, 1000);
+        //
+        //   // Cleanup
+        //   return () => clearInterval(intervalId);
+        // }, []);
+
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              padding: '20px',
+              borderRadius: '12px',
+              marginBottom: '20px',
+            }}
+          >
+            <h2 style={{ color: 'white' }}>Timer</h2>
+            <p style={{ color: 'white', fontSize: '32px' }}>
+              {seconds}s
+            </p>
+          </div>
+        );
+      }
+
+      // TODO: EXERCISE 3 - Simulated Data Fetching
+      function HeroLoader() {
+        const [heroes, setHeroes] = React.useState([]);
+        const [loading, setLoading] = React.useState(true);
+
+        // TODO: Use useEffect to simulate fetching data
+        // React.useEffect(() => {
+        //   // Simulate API delay
+        //   setTimeout(() => {
+        //     setHeroes(mockHeroes);
+        //     setLoading(false);
+        //   }, 2000);
+        // }, []);
+
+        if (loading) {
+          return (
+            <div
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                padding: '40px',
+              }}
+            >
+              Loading heroes...
+            </div>
+          );
+        }
+
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              padding: '20px',
+              borderRadius: '12px',
+            }}
+          >
+            <h2 style={{ color: 'white' }}>Loaded Heroes</h2>
+            <ul>
+              {heroes.map((hero) => (
+                <li key={hero.id} style={{ color: 'white' }}>
+                  {hero.name} - {hero.team}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div
+            style={{
+              maxWidth: '800px',
+              margin: '0 auto',
+              padding: '20px',
+            }}
+          >
+            <h1
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                fontSize: '48px',
+                marginBottom: '40px',
+              }}
+            >
+              useEffect Examples
+            </h1>
+            <TitleUpdater />
+            <Timer />
+            <HeroLoader />
+          </div>
+        );
+      }
+
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<App />);
+    </script>
+  </body>
+</html>

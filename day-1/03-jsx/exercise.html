@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Exercise 3: JSX</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React and ReactDOM -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <!-- TODO: Include Babel Standalone for JSX transformation -->
+    <!-- https://unpkg.com/@babel/standalone/babel.min.js -->
+
+    <!-- TODO: Change script type to "text/babel" to enable JSX -->
+    <script>
+      const rootElement = document.getElementById('root');
+
+      // TODO: Convert this React.createElement code to JSX
+      const element = React.createElement(
+        'div',
+        {
+          className: 'container',
+          style: {
+            padding: '40px',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '16px',
+            textAlign: 'center',
+            maxWidth: '600px',
+            margin: '50px auto',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+          },
+        },
+        React.createElement(
+          'h1',
+          {
+            style: { color: 'white', fontSize: '48px', margin: '0' },
+          },
+          'Hello World',
+        ),
+        React.createElement(
+          'p',
+          { style: { color: 'white', fontSize: '24px' } },
+          'Welcome to React!',
+        ),
+      );
+
+      // TODO: Try using JSX instead! It should look like:
+      // const element = (
+      //   <div className="container" style={{...styles...}}>
+      //     <h1 style={{...styles...}}>Hello World</h1>
+      //     <p style={{...styles...}}>Welcome to React!</p>
+      //   </div>
+      // );
+
+      // TODO: Use variables in JSX
+      // const name = 'Your Name';
+      // <h1>Hello, {name}!</h1>
+
+      // TODO: Use expressions in JSX
+      // <p>The time is {new Date().toLocaleTimeString()}</p>
+
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(element);
+    </script>
+  </body>
+</html>
