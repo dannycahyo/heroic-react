@@ -16,9 +16,17 @@ A three day workshop to learn the fundamentals of React by building a simple Her
 
 ## Tools & Setup
 
+### Day 1
+
 - Modern web browser (Chrome/Firefox/Edge)
 - Code editor (VS Code recommended)
 - Live Server extension or similar local development server
+
+### Day 2 & 3
+
+- Node.js 16+ and npm 7+
+- Modern web browser
+- Code editor (VS Code recommended)
 
 ## 📚 Resources
 
@@ -30,11 +38,22 @@ Before starting, check out these helpful guides:
 
 ## 🗂️ Workshop Structure
 
+### Day 1
+
 Each exercise folder contains:
 
 - `README.md` - Instructions and learning objectives
 - `exercise.html` - Starter code with TODOs
 - `solution.html` - Complete working solution
+
+### Day 2 & 3
+
+Each exercise is a Vite project with:
+
+- `exercises/<name>/src/App.jsx` - Main component to edit
+- `solutions/<name>/src/App.jsx` - Complete working solution
+- `README.md` - Instructions per exercise
+- Run with `npm run dev:01`, `npm run solution:01`, etc.
 
 ## Curriculum
 
@@ -138,38 +157,6 @@ npm install
 - Updating state immutably
 - Managing multiple state variables
 - **Exercise:** Add favorite functionality - users can mark heroes as favorites
-- **Exercise:** Create a `HeroCard` component that displays hero information
-
-#### 2. Rendering Lists
-
-**[📂 Exercise Folder](./day-2/02-lists/)**
-
-- Using `map()` to render arrays
-- The importance of `key` prop
-- Filtering and transforming data
-- Working with arrays in React
-- **Exercise:** Display a list of heroes using the `HeroCard` component
-
-#### 3. Handling Events
-
-**[📂 Exercise Folder](./day-2/03-events/)**
-
-- Event handling in React (onClick, onChange, etc.)
-- Synthetic events
-- Event handler functions
-- Passing arguments to event handlers
-- **Exercise:** Add click handlers to toggle hero details
-
-#### 4. State with `useState`
-
-**[📂 Exercise Folder](./day-2/04-state/)**
-
-- What is state?
-- The `useState` hook
-- State vs Props
-- Updating state immutably
-- Managing multiple state variables
-- **Exercise:** Add favorite functionality - users can mark heroes as favorites
 
 ---
 
@@ -177,9 +164,18 @@ npm install
 
 **[📁 Day 3 Exercises](./day-3/)**
 
+> **Note:** Day 3 uses a modern React setup with Vite instead of HTML files. See [Day 3 README](./day-3/README.md) for setup instructions.
+
+**Setup:**
+
+```bash
+cd day-3
+npm install
+```
+
 #### 1. Side Effects with `useEffect`
 
-**[📂 Exercise Folder](./day-3/01-useEffect/)**
+**[📂 Exercise Folder](./day-3/exercises/01-useEffect/)** | `npm run dev:01`
 
 - What are side effects?
 - The `useEffect` hook
@@ -190,7 +186,7 @@ npm install
 
 #### 2. Data Fetching
 
-**[📂 Exercise Folder](./day-3/02-data-fetching/)**
+**[📂 Exercise Folder](./day-3/exercises/02-data-fetching/)** | `npm run dev:02`
 
 - Fetching data with `fetch()`
 - Async/await in React
@@ -200,7 +196,7 @@ npm install
 
 #### 3. Final Project - Product Showcase
 
-**[📂 Exercise Folder](./day-3/03-final-project/)**
+**[📂 Exercise Folder](./day-3/exercises/03-final-project/)** | `npm run dev:03`
 
 Build a complete mini web app that combines everything learned:
 
@@ -236,6 +232,7 @@ After mastering these fundamentals, students can explore:
 - React Router for navigation
 - State management libraries (Redux, Zustand)
 - Styling solutions (CSS Modules, Styled Components, Tailwind)
-- Build tools and modern development setup (Vite, Create React App)
 - Performance optimization techniques
 - Testing React applications
+- TypeScript with React
+- Server-side rendering (Next.js)
