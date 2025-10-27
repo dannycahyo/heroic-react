@@ -1,0 +1,21 @@
+{
+  "name": "heroic-react-day-3",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:01": "vite --config exercises/01-useEffect/vite.config.js",
+    "dev:02": "vite --config exercises/02-data-fetching/vite.config.js",
+    "dev:03": "vite --config exercises/03-final-project/vite.config.js",
+    "solution:01": "vite --config solutions/01-useEffect/vite.config.js",
+    "solution:02": "vite --config solutions/02-data-fetching/vite.config.js",
+    "solution:03": "vite --config solutions/03-final-project/vite.config.js"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^5.0.0"
+  }
+}
