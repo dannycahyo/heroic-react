@@ -4,8 +4,6 @@ A three day workshop to learn the fundamentals of React by building a simple Her
 
 ## Workshop Overview
 
-**Total Duration:** 8 hours (Day 1: 2h, Day 2: 3h, Day 3: 3h)
-
 **Goal:** Build a strong foundation in React fundamentals and create a mini web app that integrates with the [DummyJSON Products API](https://dummyjson.com/docs/products).
 
 **Target Audience:** Beginners to React who have basic JavaScript knowledge.
@@ -40,11 +38,11 @@ Each exercise folder contains:
 
 ## Curriculum
 
-### Day 1: From DOM to React (2 hours)
+### Day 1: From DOM to React
 
 **[📁 Day 1 Exercises](./day-1/)**
 
-#### 1. Basic JavaScript-rendered Hello World (30 min)
+#### 1. Basic JavaScript-rendered Hello World
 
 **[📂 Exercise Folder](./day-1/01-dom-hello-world/)**
 
@@ -54,7 +52,7 @@ Each exercise folder contains:
 - Adding text content and attributes
 - **Exercise:** Build a "Hello World" page using only JavaScript
 
-#### 2. Intro to React with `React.createElement()` (30 min)
+#### 2. Intro to React with `React.createElement()`
 
 **[📂 Exercise Folder](./day-1/02-react-createElement/)**
 
@@ -65,7 +63,7 @@ Each exercise folder contains:
 - Rendering with `ReactDOM.createRoot()` and `root.render()`
 - **Exercise:** Recreate the Hello World using `React.createElement()`
 
-#### 3. JSX - JavaScript XML (45 min)
+#### 3. JSX - JavaScript XML
 
 **[📂 Exercise Folder](./day-1/03-jsx/)**
 
@@ -76,7 +74,7 @@ Each exercise folder contains:
 - JSX vs `React.createElement()` - understanding the compilation
 - **Exercise:** Convert createElement examples to JSX
 
-#### 4. Creating Custom Components (15 min)
+#### 4. Creating Custom Components
 
 **[📂 Exercise Folder](./day-1/04-custom-components/)**
 
@@ -87,7 +85,7 @@ Each exercise folder contains:
 
 ---
 
-### Day 2: Interactive React (3 hours)
+### Day 2: Interactive React
 
 **[📁 Day 2 Exercises](./day-2/)**
 
@@ -100,7 +98,7 @@ cd day-2
 npm install
 ```
 
-#### 1. Props - Passing Data to Components (45 min)
+#### 1. Props - Passing Data to Components
 
 **[📂 Exercise Folder](./day-2/exercises/01-props/)** | `npm run dev:01`
 
@@ -110,7 +108,7 @@ npm install
 - Default props
 - **Exercise:** Create a `HeroCard` component that displays hero information
 
-#### 2. Rendering Lists (45 min)
+#### 2. Rendering Lists
 
 **[📂 Exercise Folder](./day-2/exercises/02-lists/)** | `npm run dev:02`
 
@@ -120,7 +118,7 @@ npm install
 - Working with arrays in React
 - **Exercise:** Display a list of heroes using the `HeroCard` component
 
-#### 3. Handling Events (45 min)
+#### 3. Handling Events
 
 **[📂 Exercise Folder](./day-2/exercises/03-events/)** | `npm run dev:03`
 
@@ -130,7 +128,7 @@ npm install
 - Passing arguments to event handlers
 - **Exercise:** Add click handlers to toggle hero details
 
-#### 4. State with `useState` (45 min)
+#### 4. State with `useState`
 
 **[📂 Exercise Folder](./day-2/exercises/04-state/)** | `npm run dev:04`
 
@@ -142,7 +140,7 @@ npm install
 - **Exercise:** Add favorite functionality - users can mark heroes as favorites
 - **Exercise:** Create a `HeroCard` component that displays hero information
 
-#### 2. Rendering Lists (45 min)
+#### 2. Rendering Lists
 
 **[📂 Exercise Folder](./day-2/02-lists/)**
 
@@ -152,7 +150,7 @@ npm install
 - Working with arrays in React
 - **Exercise:** Display a list of heroes using the `HeroCard` component
 
-#### 3. Handling Events (45 min)
+#### 3. Handling Events
 
 **[📂 Exercise Folder](./day-2/03-events/)**
 
@@ -162,7 +160,7 @@ npm install
 - Passing arguments to event handlers
 - **Exercise:** Add click handlers to toggle hero details
 
-#### 4. State with `useState` (45 min)
+#### 4. State with `useState`
 
 **[📂 Exercise Folder](./day-2/04-state/)**
 
@@ -175,11 +173,11 @@ npm install
 
 ---
 
-### Day 3: Side Effects and Real-World App (3 hours)
+### Day 3: Side Effects and Real-World App
 
 **[📁 Day 3 Exercises](./day-3/)**
 
-#### 1. Side Effects with `useEffect` (1 hour)
+#### 1. Side Effects with `useEffect`
 
 **[📂 Exercise Folder](./day-3/01-useEffect/)**
 
@@ -190,7 +188,7 @@ npm install
 - Common use cases (timers, subscriptions, etc.)
 - **Exercise:** Create a timer and update document title based on state
 
-#### 2. Data Fetching (1 hour)
+#### 2. Data Fetching
 
 **[📂 Exercise Folder](./day-3/02-data-fetching/)**
 
@@ -200,7 +198,7 @@ npm install
 - Error handling
 - **Exercise:** Fetch products from DummyJSON API
 
-#### 3. Final Project - Product Showcase (1 hour)
+#### 3. Final Project - Product Showcase
 
 **[📂 Exercise Folder](./day-3/03-final-project/)**
 
