@@ -31,8 +31,8 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-      // Greeting component with props
-      function Greeting({ name }) {
+      // Header component - displays the main title
+      function Header() {
         return (
           <h1
             style={{
@@ -40,78 +40,69 @@
               fontSize: '42px',
               margin: '0 0 10px 0',
               fontWeight: 'bold',
+              textAlign: 'center',
             }}
           >
-            Hello, {name}! 👋
+            Welcome to React Components! �
           </h1>
         );
       }
 
-      // Card component that wraps children
-      function Card({ children }) {
-        const cardStyle = {
-          padding: '40px',
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '16px',
-          textAlign: 'center',
-          maxWidth: '600px',
-          margin: '20px auto',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-        };
-
-        return <div style={cardStyle}>{children}</div>;
-      }
-
-      // Button component with props
-      function Button({ text, onClick }) {
-        const buttonStyle = {
-          padding: '12px 24px',
-          fontSize: '18px',
-          backgroundColor: '#fff',
-          color: '#667eea',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer',
-          fontWeight: 'bold',
-          marginTop: '20px',
-          transition: 'transform 0.2s',
-        };
-
-        return (
-          <button
-            style={buttonStyle}
-            onClick={onClick}
-            onMouseEnter={(e) =>
-              (e.target.style.transform = 'scale(1.05)')
-            }
-            onMouseLeave={(e) =>
-              (e.target.style.transform = 'scale(1)')
-            }
-          >
-            {text}
-          </button>
-        );
-      }
-
-      // Message component
-      function Message({ text }) {
+      // Message component - displays a message
+      function Message() {
         return (
           <p
             style={{
               color: 'white',
               fontSize: '20px',
               margin: '15px 0',
+              textAlign: 'center',
             }}
           >
-            {text}
+            Components are the building blocks of React applications
           </p>
         );
       }
 
-      // Hero component (bonus)
-      function Hero({ name, power }) {
+      // Button component - displays a button
+      function Button() {
+        return (
+          <button
+            style={{
+              padding: '12px 24px',
+              fontSize: '18px',
+              backgroundColor: '#fff',
+              color: '#667eea',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              margin: '10px',
+            }}
+          >
+            Click Me!
+          </button>
+        );
+      }
+
+      // Footer component - displays copyright
+      function Footer() {
+        return (
+          <p
+            style={{
+              color: 'rgba(255, 255, 255, 0.8)',
+              fontSize: '14px',
+              textAlign: 'center',
+              marginTop: '20px',
+            }}
+          >
+            © 2024 My React Workshop
+          </p>
+        );
+      }
+
+      // Hero components with hardcoded data (Bonus!)
+      function HeroIronMan() {
         return (
           <div
             style={{
@@ -119,10 +110,11 @@
               padding: '20px',
               borderRadius: '8px',
               margin: '10px 0',
+              textAlign: 'center',
             }}
           >
             <h3 style={{ color: 'white', margin: '0 0 10px 0' }}>
-              {name}
+              🦾 Iron Man
             </h3>
             <p
               style={{
@@ -131,8 +123,119 @@
                 fontSize: '14px',
               }}
             >
-              {power}
+              Genius, billionaire, playboy, philanthropist
             </p>
+          </div>
+        );
+      }
+
+      function HeroSpiderMan() {
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              padding: '20px',
+              borderRadius: '8px',
+              margin: '10px 0',
+              textAlign: 'center',
+            }}
+          >
+            <h3 style={{ color: 'white', margin: '0 0 10px 0' }}>
+              🕷️ Spider-Man
+            </h3>
+            <p
+              style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                margin: '0',
+                fontSize: '14px',
+              }}
+            >
+              With great power comes great responsibility
+            </p>
+          </div>
+        );
+      }
+
+      function HeroWonderWoman() {
+        return (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              padding: '20px',
+              borderRadius: '8px',
+              margin: '10px 0',
+              textAlign: 'center',
+            }}
+          >
+            <h3 style={{ color: 'white', margin: '0 0 10px 0' }}>
+              ⚡ Wonder Woman
+            </h3>
+            <p
+              style={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                margin: '0',
+                fontSize: '14px',
+              }}
+            >
+              Warrior princess with super strength
+            </p>
+          </div>
+        );
+      }
+
+      // Container component to wrap content with styling
+      function Container() {
+        return (
+          <div
+            style={{
+              padding: '40px',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '16px',
+              maxWidth: '600px',
+              margin: '20px auto',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <Header />
+            <Message />
+            <div style={{ textAlign: 'center' }}>
+              <Button />
+              <Button />
+            </div>
+            <Footer />
+          </div>
+        );
+      }
+
+      // HeroGallery component that shows all heroes
+      function HeroGallery() {
+        return (
+          <div
+            style={{
+              padding: '40px',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '16px',
+              maxWidth: '600px',
+              margin: '20px auto',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <h2
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                marginTop: '0',
+              }}
+            >
+              My Favorite Heroes
+            </h2>
+            <HeroIronMan />
+            <HeroSpiderMan />
+            <HeroWonderWoman />
           </div>
         );
       }
@@ -141,38 +244,8 @@
       function App() {
         return (
           <div>
-            {/* First Card */}
-            <Card>
-              <Greeting name="React Developer" />
-              <Message text="Welcome to the world of components! 🚀" />
-              <Button
-                text="Click Me!"
-                onClick={() => alert('Hello from the component!')}
-              />
-            </Card>
-
-            {/* Second Card with Heroes */}
-            <Card>
-              <h2 style={{ color: 'white', marginTop: '0' }}>
-                Your Favorite Heroes
-              </h2>
-              <Hero
-                name="Iron Man"
-                power="Genius intellect, powered armor"
-              />
-              <Hero
-                name="Spider-Man"
-                power="Wall-crawling, super strength"
-              />
-              <Hero
-                name="Wonder Woman"
-                power="Super strength, combat skills"
-              />
-              <Button
-                text="Add More Heroes"
-                onClick={() => alert('More heroes coming soon!')}
-              />
-            </Card>
+            <Container />
+            <HeroGallery />
           </div>
         );
       }
@@ -184,10 +257,11 @@
 
       // Key Takeaways:
       // 1. Components are reusable functions that return JSX
-      // 2. Component names must start with capital letter
-      // 3. Props let you pass data to components
-      // 4. Children prop lets you wrap content
-      // 5. Components can be composed together!
+      // 2. Component names MUST start with a capital letter (PascalCase)
+      // 3. Components help break down your UI into smaller, manageable pieces
+      // 4. You can reuse the same component multiple times (like Button)
+      // 5. Components can be composed together to build complex UIs!
+      // 6. Each component has its own responsibility and styling
     </script>
   </body>
 </html>

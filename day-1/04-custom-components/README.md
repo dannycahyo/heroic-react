@@ -6,7 +6,7 @@
 - Learn to create function components
 - Follow component naming conventions
 - Compose components together
-- Pass basic props to components
+- Reuse components multiple times
 
 ## 📚 Background
 
@@ -14,9 +14,9 @@ Components are the building blocks of React applications. They let you split the
 
 Think of components like JavaScript functions:
 
-- They accept inputs (called "props")
-- They return React elements describing what should appear on screen
-- They can be reused multiple times
+- They are just functions that return JSX
+- They can be reused multiple times throughout your app
+- They help organize your code into logical, manageable pieces
 
 **Component Rules:**
 
@@ -34,55 +34,96 @@ function Welcome() {
 <Welcome />;
 ```
 
+**Why Components?**
+
+Instead of writing everything in one giant piece of JSX, we break it into smaller, reusable pieces:
+
+```jsx
+// Without components - hard to read and reuse
+function App() {
+  return (
+    <div>
+      <h1>Welcome!</h1>
+      <p>Some text</p>
+      <h1>Welcome!</h1>
+      <p>Some text</p>
+    </div>
+  );
+}
+
+// With components - clean and reusable!
+function WelcomeCard() {
+  return (
+    <div>
+      <h1>Welcome!</h1>
+      <p>Some text</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <WelcomeCard />
+      <WelcomeCard />
+    </div>
+  );
+}
+```
+
 ## 🎯 Exercise
 
 Create your first custom React components and compose them together.
 
 ### Requirements:
 
-1. Create a `Greeting` component that displays a welcome message
-2. Create a `Card` component that wraps content with styling
-3. Use your components in the main app
-4. Accept a `name` prop in the Greeting component
-5. Compose components (use one component inside another)
+1. Create a `Header` component that displays a title
+2. Create a `Message` component that displays a message
+3. Create a `Button` component with static text
+4. Create a `Footer` component with copyright text
+5. Compose all components together in an `App` component
+6. Reuse components multiple times
 
 ### Bonus Challenges:
 
-- Create a `Button` component with an `onClick` prop
-- Create a `Hero` component that displays hero information
-- Use the `children` prop
-- Create multiple instances of the same component
+- Create a `Hero` component that displays hardcoded hero information
+- Create multiple different hero components (Hero1, Hero2, Hero3)
+- Experiment with different component compositions
+- Add more styling to your components
 
 ## 💡 Hints
 
 ```jsx
 // Simple component
-function Greeting() {
-  return <h1>Hello!</h1>;
+function Header() {
+  return <h1>My Awesome Website</h1>;
 }
 
-// Component with props
-function Greeting(props) {
-  return <h1>Hello, {props.name}!</h1>;
+// Another component
+function Message() {
+  return <p>Welcome to React!</p>;
 }
 
-// Using destructuring
-function Greeting({ name }) {
-  return <h1>Hello, {name}!</h1>;
+// Using components together
+function App() {
+  return (
+    <div>
+      <Header />
+      <Message />
+      <Message />
+    </div>
+  );
 }
 
-// Using the component
-<Greeting name="John" />;
-
-// Children prop
-function Card(props) {
-  return <div className="card">{props.children}</div>;
+// Component with more JSX
+function Card() {
+  return (
+    <div style={{ padding: '20px', border: '1px solid #ddd' }}>
+      <h2>Card Title</h2>
+      <p>Card content</p>
+    </div>
+  );
 }
-
-<Card>
-  <h1>Title</h1>
-  <p>Content</p>
-</Card>;
 ```
 
 ## 🧪 Testing
