@@ -32,25 +32,32 @@
 
     <script type="text/babel">
       // TODO: Create a HeroCard component that accepts props
-      // Props: name, power, image, realName (optional)
-      //
-      // function HeroCard(props) {
-      //   return (
-      //     <div style={{...card styles...}}>
-      //       <img src={props.image} alt={props.name} />
-      //       <h2>{props.name}</h2>
-      //       <p>{props.power}</p>
-      //       {/* Show realName only if provided */}
-      //     </div>
-      //   );
-      // }
+      // The component should receive: name, power, image, and realName (optional)
+      // Hint: Access props using props.propertyName or use destructuring
+      // Hint: For conditional rendering, use the && operator or ternary
 
-      // BONUS: Use destructuring for cleaner code
-      // function HeroCard({ name, power, image, realName }) {
-      //   ...
-      // }
+      function HeroCard(/* What parameters go here? */) {
+        // Define your card styling
+        const cardStyle = {
+          // Add styles for: backgroundColor, borderRadius, padding, etc.
+        };
 
-      // TODO: Create the App component
+        const imageStyle = {
+          // Add styles for: width, height, objectFit, borderRadius
+        };
+
+        return (
+          <div>
+            {/* TODO: Return a div with the card */}
+            {/* Include: img, h2 for name, p for power, conditional realName */}
+          </div>
+        );
+      }
+
+      // BONUS TODO: Create a Badge component for the team
+      // It should accept: text and color (with default value)
+
+      // Main App component
       function App() {
         return (
           <div
@@ -71,17 +78,16 @@
               Heroic Gallery
             </h1>
 
-            {/* TODO: Create multiple HeroCard components with different data */}
-            {/* 
-          <HeroCard 
-            name="Iron Man"
-            power="Genius intellect, powered armor suit"
-            image="https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/346-iron-man.jpg"
-            realName="Tony Stark"
-          />
-          */}
-
-            {/* Add more hero cards... */}
+            {/* TODO: Create HeroCard components with different hero data */}
+            {/* Example heroes to use:
+                - Iron Man (Tony Stark) - Genius intellect, powered armor suit
+                - Spider-Man (Peter Parker) - Wall-crawling, super strength, spider-sense
+                - Wonder Woman (Diana Prince) - Super strength, speed, combat skills
+                
+                Use this image URL pattern:
+                https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/346-iron-man.jpg
+                (Replace the number and name for different heroes)
+            */}
           </div>
         );
       }

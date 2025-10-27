@@ -88,12 +88,12 @@
         realName,
         team = 'Independent',
       }) {
-        // TODO: Create a handleFavorite function that alerts the hero's name
-        // const handleFavorite = () => {
-        //   alert(`${name} added to favorites!`);
-        // };
+        // TODO: Create a handleFavorite function
+        // Hint: Create a function that shows an alert with the hero's name
+        // Syntax: const functionName = () => { /* code here */ }
 
-        // TODO: Create handleViewDetails function
+        // TODO: Create a handleViewDetails function
+        // Hint: Similar to handleFavorite but with different message
 
         const cardStyle = {
           backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -163,21 +163,37 @@
 
             <div style={{ marginTop: '15px' }}>
               {/* TODO: Add a Favorite button with onClick handler */}
-              {/* <button style={buttonStyle} onClick={handleFavorite}>❤️ Favorite</button> */}
+              {/* Hint: <button onClick={yourFunctionName}>Button Text</button> */}
 
-              {/* TODO: Add a View Details button */}
+              {/* TODO: Add a View Details button with its own onClick */}
 
-              {/* BONUS: Add hover effects using onMouseEnter and onMouseLeave */}
+              {/* BONUS: Add hover effects */}
+              {/* Hint: Use onMouseEnter and onMouseLeave events */}
+              {/* Hint: Change the card's style.transform to 'scale(1.05)' on hover */}
             </div>
           </div>
         );
       }
 
       function App() {
-        // TODO: Create a handleSearch function for the search input
-        // const handleSearch = (event) => {
-        //   console.log('Searching for:', event.target.value);
-        // };
+        // TODO: Create a handleSearch function
+        // Hint: It should accept an 'event' parameter
+        // Hint: Log the value using event.target.value
+        // Hint: Use console.log() to see the search term
+
+        const inputStyle = {
+          width: '100%',
+          maxWidth: '400px',
+          padding: '12px 20px',
+          fontSize: '16px',
+          borderRadius: '8px',
+          border: '2px solid rgba(255, 255, 255, 0.2)',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          color: 'white',
+          backdropFilter: 'blur(10px)',
+          margin: '0 auto 20px auto',
+          display: 'block',
+        };
 
         return (
           <div
@@ -199,12 +215,8 @@
             </h1>
 
             {/* TODO: Add a search input with onChange handler */}
-            {/* <input 
-            type="text"
-            placeholder="Search heroes..."
-            onChange={handleSearch}
-            style={{...input styles...}}
-          /> */}
+            {/* Hint: <input type="text" onChange={yourFunction} ... /> */}
+            {/* The onChange event fires every time the input value changes */}
 
             <div
               style={{

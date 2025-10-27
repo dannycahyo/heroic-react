@@ -70,10 +70,12 @@
         },
       ];
 
-      // TODO: EXERCISE 1 - Simple Counter
+      // TODO: EXERCISE 1 - Simple Counter Component
       function Counter() {
-        // TODO: Create count state
-        // const [count, setCount] = React.useState(0);
+        // TODO: Create a state variable for count
+        // Hint: Use React.useState(initialValue)
+        // Hint: It returns an array: [value, setterFunction]
+        // Example pattern: const [stateName, setStateName] = React.useState(0);
 
         return (
           <div
@@ -95,12 +97,15 @@
                 margin: '10px 0',
               }}
             >
-              {/* Count: {count} */}
+              {/* TODO: Display the count value here */}
+              Count: 0
             </p>
-            {/* TODO: Add buttons to increment and decrement */}
-            {/* <button onClick={() => setCount(count + 1)}>+</button> */}
-            {/* <button onClick={() => setCount(count - 1)}>-</button> */}
-            {/* <button onClick={() => setCount(0)}>Reset</button> */}
+
+            {/* TODO: Add three buttons: Increment (+), Decrement (-), Reset */}
+            {/* Hint: Use onClick to call the setter function */}
+            {/* Hint: For increment, you can use setCount(count + 1) */}
+            {/* Hint: For decrement, use setCount(count - 1) */}
+            {/* Hint: For reset, use setCount(0) */}
           </div>
         );
       }
@@ -124,7 +129,7 @@
         );
       }
 
-      // TODO: Update HeroCard to accept isFavorite and onToggleFavorite props
+      // HeroCard component
       function HeroCard({
         id,
         name,
@@ -202,19 +207,11 @@
             <Badge text={team} />
 
             <div style={{ marginTop: '15px' }}>
-              {/* TODO: Make this button work with state */}
-              {/* Change background color if favorited */}
-              <button
-                style={{
-                  ...buttonStyle,
-                  // backgroundColor: isFavorite ? '#ff6b6b' : '#fff',
-                  // color: isFavorite ? '#fff' : '#667eea'
-                }}
-                // onClick={() => onToggleFavorite(id)}
-              >
-                {/* {isFavorite ? '❤️ Favorited' : '🤍 Favorite'} */}
-                Favorite
-              </button>
+              {/* TODO: Wire up the button to use isFavorite and onToggleFavorite */}
+              {/* Hint: Change button background color based on isFavorite */}
+              {/* Hint: Change button text based on isFavorite (❤️ Favorited vs 🤍 Favorite) */}
+              {/* Hint: Call onToggleFavorite(id) when clicked */}
+              <button style={buttonStyle}>Favorite</button>
             </div>
           </div>
         );
@@ -222,26 +219,29 @@
 
       function App() {
         // TODO: EXERCISE 2 - Search State
-        // const [searchTerm, setSearchTerm] = React.useState('');
+        // Create a state variable called searchTerm with initial value ''
+        // Hint: Use the same pattern as the counter
 
-        // TODO: EXERCISE 3 - Favorites State (array of hero IDs)
-        // const [favorites, setFavorites] = React.useState([]);
+        // TODO: EXERCISE 3 - Favorites State
+        // Create a state variable called favorites with initial value []
+        // This will store an array of hero IDs
+        // Hint: Initial value is an empty array, not a number or string
 
-        // TODO: Filter heroes based on search term
-        // const filteredHeroes = heroesData.filter(hero =>
-        //   hero.name.toLowerCase().includes(searchTerm.toLowerCase())
-        // );
+        // TODO: Filter heroes based on searchTerm
+        // Hint: Use the filter() method on heroesData
+        // Hint: Check if hero.name includes the searchTerm
+        // Hint: Use .toLowerCase() for case-insensitive search
+        // Pattern: array.filter(item => condition)
+        const filteredHeroes = heroesData; // Replace this with your filtered array
 
-        // TODO: Create toggle favorite function
-        // const toggleFavorite = (heroId) => {
-        //   if (favorites.includes(heroId)) {
-        //     // Remove from favorites
-        //     setFavorites(favorites.filter(id => id !== heroId));
-        //   } else {
-        //     // Add to favorites
-        //     setFavorites([...favorites, heroId]);
-        //   }
-        // };
+        // TODO: Create toggleFavorite function
+        // This function should:
+        // 1. Accept heroId as parameter
+        // 2. Check if heroId is already in favorites array
+        // 3. If yes, remove it (use filter)
+        // 4. If no, add it (use spread operator [...favorites, heroId])
+        // Hint: Use favorites.includes(heroId) to check
+        // Hint: Use setFavorites to update the state
 
         const inputStyle = {
           width: '100%',
@@ -277,21 +277,15 @@
             </h1>
 
             {/* TODO: Show favorites count */}
-            {/* <p style={{ color: 'white', textAlign: 'center', fontSize: '18px' }}>
-            Favorites: {favorites.length}
-          </p> */}
+            {/* Hint: Display favorites.length */}
 
             {/* EXERCISE 1: Counter Component */}
             <Counter />
 
-            {/* TODO: EXERCISE 2 - Search input */}
-            {/* <input 
-            type="text"
-            placeholder="Search heroes..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={inputStyle}
-          /> */}
+            {/* TODO: EXERCISE 2 - Add search input */}
+            {/* Hint: Set value to searchTerm */}
+            {/* Hint: Use onChange to update searchTerm with event.target.value */}
+            {/* Hint: This is called a "controlled input" */}
 
             <div
               style={{
@@ -301,15 +295,11 @@
                 gap: '24px',
               }}
             >
-              {/* TODO: Use filteredHeroes instead of heroesData */}
-              {/* TODO: Pass isFavorite and onToggleFavorite props */}
+              {/* TODO: Map over filteredHeroes instead of heroesData */}
+              {/* TODO: Pass isFavorite prop - check if hero.id is in favorites */}
+              {/* TODO: Pass onToggleFavorite prop - pass your toggle function */}
               {heroesData.map((hero) => (
-                <HeroCard
-                  key={hero.id}
-                  {...hero}
-                  // isFavorite={favorites.includes(hero.id)}
-                  // onToggleFavorite={toggleFavorite}
-                />
+                <HeroCard key={hero.id} {...hero} />
               ))}
             </div>
           </div>

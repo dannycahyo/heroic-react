@@ -33,6 +33,7 @@
     <script type="text/babel">
       // TODO: Create an array of hero objects
       // Each hero should have: id, name, power, image, realName, team
+      // Hint: Create at least 3-4 hero objects in an array
       const heroes = [
         // Add hero objects here...
         // {
@@ -65,7 +66,7 @@
         );
       }
 
-      // HeroCard component (from previous exercise)
+      // HeroCard component (you created this in the previous exercise!)
       function HeroCard({
         name,
         power,
@@ -129,7 +130,7 @@
         );
       }
 
-      // TODO: Create App component
+      // Main App component
       function App() {
         return (
           <div
@@ -150,8 +151,10 @@
               Heroic Gallery
             </h1>
 
-            {/* TODO: Use map() to render HeroCard for each hero */}
-            {/* Don't forget the key prop! */}
+            {/* TODO: Use the map() method to render a HeroCard for each hero */}
+            {/* Hint: heroes.map(hero => <HeroCard ... />) */}
+            {/* IMPORTANT: Don't forget to add the 'key' prop! */}
+            {/* Hint: You can spread the hero object with {...hero} */}
             <div
               style={{
                 display: 'grid',
@@ -160,14 +163,17 @@
                 gap: '24px',
               }}
             >
-              {/* heroes.map(hero => ...) */}
+              {/* Your map() code goes here */}
             </div>
 
-            {/* BONUS: Show total count */}
+            {/* BONUS TODO: Show the total count of heroes */}
+            {/* Hint: Use heroes.length */}
 
-            {/* BONUS: Handle empty array */}
+            {/* BONUS TODO: Add a message when the array is empty */}
+            {/* Hint: Use conditional rendering with && or ternary */}
 
-            {/* BONUS: Filter by team */}
+            {/* BONUS TODO: Filter heroes by team (e.g., show only Avengers) */}
+            {/* Hint: Use the filter() method before map() */}
           </div>
         );
       }
