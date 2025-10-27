@@ -1,0 +1,24 @@
+{
+  "name": "heroic-react-day2",
+  "version": "1.0.0",
+  "description": "Day 2: Interactive React - Props, Lists, Events, and State",
+  "type": "module",
+  "scripts": {
+    "dev:01": "vite --config exercises/01-props/vite.config.js",
+    "dev:02": "vite --config exercises/02-lists/vite.config.js",
+    "dev:03": "vite --config exercises/03-events/vite.config.js",
+    "dev:04": "vite --config exercises/04-state/vite.config.js",
+    "solution:01": "vite --config solutions/01-props/vite.config.js",
+    "solution:02": "vite --config solutions/02-lists/vite.config.js",
+    "solution:03": "vite --config solutions/03-events/vite.config.js",
+    "solution:04": "vite --config solutions/04-state/vite.config.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8"
+  }
+}

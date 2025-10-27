@@ -91,14 +91,55 @@ Each exercise folder contains:
 
 **[📁 Day 2 Exercises](./day-2/)**
 
+> **Note:** Day 2 uses a modern React setup with Vite instead of HTML files. See [Day 2 README](./day-2/README.md) for setup instructions.
+
+**Setup:**
+
+```bash
+cd day-2
+npm install
+```
+
 #### 1. Props - Passing Data to Components (45 min)
 
-**[📂 Exercise Folder](./day-2/01-props/)**
+**[📂 Exercise Folder](./day-2/exercises/01-props/)** | `npm run dev:01`
 
 - Understanding props (properties)
 - Passing data from parent to child
 - Destructuring props for cleaner code
 - Default props
+- **Exercise:** Create a `HeroCard` component that displays hero information
+
+#### 2. Rendering Lists (45 min)
+
+**[📂 Exercise Folder](./day-2/exercises/02-lists/)** | `npm run dev:02`
+
+- Using `map()` to render arrays
+- The importance of `key` prop
+- Filtering and transforming data
+- Working with arrays in React
+- **Exercise:** Display a list of heroes using the `HeroCard` component
+
+#### 3. Handling Events (45 min)
+
+**[📂 Exercise Folder](./day-2/exercises/03-events/)** | `npm run dev:03`
+
+- Event handling in React (onClick, onChange, etc.)
+- Synthetic events
+- Event handler functions
+- Passing arguments to event handlers
+- **Exercise:** Add click handlers to toggle hero details
+
+#### 4. State with `useState` (45 min)
+
+**[📂 Exercise Folder](./day-2/exercises/04-state/)** | `npm run dev:04`
+
+- What is state?
+- The `useState` hook
+- State vs Props
+- Updating state immutably
+- Managing multiple state variables
+- **Exercise:** Add favorite functionality - users can mark heroes as favorites
 - **Exercise:** Create a `HeroCard` component that displays hero information
 
 #### 2. Rendering Lists (45 min)
